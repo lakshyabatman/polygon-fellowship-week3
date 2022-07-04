@@ -1,7 +1,7 @@
 
 import { ethers } from "ethers";
 import LoanManager from './abi/LoanManager.json'
-const contractAddress = "0x4DE94C5bd0cd1C38F43a6e1B842B835324c7061d"
+const contractAddress = "0x39A82835038A5414E8167CC0c8457ef27F36e877"
 export const connectWallet =async () => {
     try {
         const {ethereum} = window;
@@ -33,7 +33,7 @@ export const issueALoan =async (value) => {
         await connectedContract.issueLoan(
             {
               value:ethers.utils.parseEther(value),
-              gasLimit: 500000000000,
+              gasLimit: 10000000
             }
           )
         const accounts = await ethereum.request({ method: "eth_requestAccounts" });
@@ -59,11 +59,9 @@ export const repay = async () => {
 
         const connectedContract = new ethers.Contract(contractAddress, LoanManager.abi, signer);
 
-        await connectedContract.repayLoan(
-            {
-                gasLimit: 500000000000
-            }
-        )
+        await connectedContract.repayLoan({
+            gasLimit: 10000000
+        })
         const loanStatus = await connectedContract.getLoanDetails(accounts[0]);
         console.log(loanStatus)
         return loanStatus;

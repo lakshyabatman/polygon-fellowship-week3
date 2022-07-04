@@ -4,8 +4,8 @@ const hre = require("hardhat");
 async function main() {
 
   const LoanManager = await hre.ethers.getContractFactory("LoanManager");
-  const loanManager = await LoanManager.deploy("0xe6b8a5cf854791412c1f6efc7caf629f5df1c747");
-
+  const loanManager = await LoanManager.deploy("0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b");
+  
   await loanManager.deployed();
 
   console.log("loanManager deployed to:", loanManager.address);

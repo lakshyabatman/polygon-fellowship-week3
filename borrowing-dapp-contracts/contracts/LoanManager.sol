@@ -34,6 +34,7 @@ contract LoanManager is Ownable {
     function issueLoan( ) payable public returns (Loan memory) {
         require(loans[msg.sender].status == LoanStatus.NOT_ISSUED , "there is already a loan" );
         loans[msg.sender] = Loan(LoanStatus.PROCESSING, msg.value, block.timestamp);
+         _token.approve(msg.sender, msg.value);
         _token.transfer(msg.sender, msg.value);
         loans[msg.sender].status = LoanStatus.ISSUED;
         return loans[msg.sender];
